@@ -18,7 +18,8 @@
     "start": "npm run build && npm run start -w server",
     "db:generate": "npm run db:generate -w server",
     "typecheck": "npm run typecheck --workspaces --if-present",
-    "test": "tsx --test shared/src/*.test.ts"
+    "test": "tsx --test shared/src/*.test.ts",
+    "reseau": "npm run build && npm run reseau -w server"
   },
   "devDependencies": {
     "concurrently": "^10.0.5",

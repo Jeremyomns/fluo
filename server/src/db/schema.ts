@@ -1,5 +1,5 @@
 import type { RecurrenceRule } from '@fluo/shared';
-import { index, integer, real, sqliteTable, text } from 'drizzle-orm/sqlite-core';
+import { index, integer, primaryKey, real, sqliteTable, text } from 'drizzle-orm/sqlite-core';
 
 export const categories = sqliteTable('categories', {
   id: text('id').primaryKey(),
@@ -69,3 +69,40 @@ export const notes = sqliteTable('notes', {
   content: text('content').notNull().default(''),
   updatedAt: text('updated_at').notNull(),
 });
+
+// ---------- Habitudes ----------
+export const habits = sqliteTable('habits', {
+  id: text('id').primaryKey(),
+  name: text('name').notNull(),
+  emoji: text('emoji').notNull().default(''),
+  days: text('days', { mode: 'json' }).$type<number[]>().notNull(), // jours prévus, 0 = dimanche
+  position: real('position').notNull().default(0),
+  createdAt: text('created_at').notNull(),
+});
+
+/** Une ligne = l'habitude a été faite ce jour-là. */
+export const habitLogs = sqliteTable(
+  'habit_logs',
+  {
+    habitId: text('habit_id')
+      .notNull()
+      .references(() => habits.id, { onDelete: 'cascade' }),
+    date: text('date').notNull(), // YYYY-MM-DD
+  },
+  (t) => [primaryKey({ columns: [t.habitId, t.date] })],
+);
+
+// ---------- Objectifs de la semaine ----------
+export const weeklyGoals = sqliteTable(
+  'weekly_goals',
+  {
+    id: text('id').primaryKey(),
+    weekStart: text('week_start').notNull(), // lundi de la semaine
+    title: text('title').notNull(),
+    done: integer('done', { mode: 'boolean' }).notNull().default(false),
+    position: real('position').notNull().default(0),
+    carriedFrom: text('carried_from'), // objectif d'une semaine précédente reporté ici
+    createdAt: text('created_at').notNull(),
+  },
+  (t) => [index('goals_week_idx').on(t.weekStart)],
+);

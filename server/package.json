@@ -7,19 +7,22 @@
     "dev": "tsx watch --clear-screen=false src/index.ts",
     "start": "tsx src/index.ts",
     "db:generate": "drizzle-kit generate",
-    "typecheck": "tsc -p tsconfig.json"
+    "typecheck": "tsc -p tsconfig.json",
+    "reseau": "tsx src/index.ts --reseau"
   },
   "dependencies": {
-    "@hono/node-server": "^2.1.1",
     "@fluo/shared": "^0.1.0",
+    "@hono/node-server": "^2.1.1",
     "better-sqlite3": "^13.0.3",
     "drizzle-orm": "^0.45.3",
     "hono": "^4.13.9",
+    "qrcode-terminal": "^0.12.0",
     "zod": "^4.6.5"
   },
   "devDependencies": {
     "@types/better-sqlite3": "^9.6.0",
     "@types/node": "^26.6.2",
+    "@types/qrcode-terminal": "^0.12.2",
     "drizzle-kit": "^0.31.11",
     "tsx": "^4.23.15"
   }

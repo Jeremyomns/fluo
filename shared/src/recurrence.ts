@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { addDaysISO, addMonthsISO, diffDaysISO, makeISO, weekdayISO } from './dates';
+import { addDaysISO, addMonthsISO, diffDaysISO, makeISO, weekdayISO, weekStartISO } from './dates';
 
 // Règles de répétition. Une tâche récurrente n'a qu'UNE occurrence ouverte à la fois :
 // quand on la coche (ou la passe), la suivante est créée à partir de la règle.
@@ -22,7 +22,7 @@ const daysInMonth = (y: number, m: number) => new Date(Date.UTC(y, m, 0)).getUTC
 /** Le 31 d'un mois de 30 jours devient le 30 (et le 29/30/31 février, le dernier jour). */
 const clampDate = (y: number, m: number, d: number) => makeISO(y, m, Math.min(d, daysInMonth(y, m)))!;
 const ymd = (iso: string) => iso.split('-').map(Number) as [number, number, number];
-const mondayOf = (iso: string) => addDaysISO(iso, -((weekdayISO(iso) + 6) % 7));
+const mondayOf = weekStartISO;
 
 /** Première date strictement après `after` qui respecte la règle. */
 export function nextOccurrence(rule: RecurrenceRule, after: string): string {

@@ -4,6 +4,11 @@
   padding: calc(env(safe-area-inset-top, 0px) + 1.5rem) 1rem calc(env(safe-area-inset-bottom, 0px) + 7rem);
 }
 
+.stack {
+  display: grid;
+  gap: 2.25rem;
+}
+
 @media (min-width: 640px) {
   .shell {
     padding-top: 3.5rem;

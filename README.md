@@ -2,8 +2,8 @@
 
 L'organisation perso du quotidien : tâches, courses, notes, habitudes.
 
-Sur ordinateur (écran ≥ 1024 px), les courses et les notes restent visibles dans la colonne de droite.
-Sur mobile et tablette, elles ont chacune leur onglet en bas de l'écran. Backend Hono + SQLite, frontend Vite + React, tout en TypeScript.
+Sur ordinateur (écran ≥ 1024 px), objectifs, habitudes, courses et notes restent visibles dans la colonne de droite.
+Sur mobile et tablette, chacun a son onglet en bas de l'écran. Backend Hono + SQLite, frontend Vite + React, tout en TypeScript.
 
 ## Prérequis
 
@@ -60,6 +60,19 @@ Sans date tapée : aujourd'hui depuis la vue Aujourd'hui, demain depuis Semaine,
 - Toucher une ligne la coche ; « Vider le panier » retire les articles cochés (5 s pour annuler).
 - Pas de doublon : « oeufs » et « Œufs » sont le même article.
 
+## Objectifs de la semaine
+
+Quelques objectifs par semaine (du lundi au dimanche). Le lundi, Fluo propose de reporter ceux de la
+semaine précédente qui ne sont pas terminés (ou de les ignorer).
+
+## Habitudes
+
+- Une grille L M M J V S D par habitude : un clic coche le jour (les jours à venir sont désactivés).
+- 🔥 indique la série en cours ; les jours non prévus (bordure pointillée) ne la cassent pas,
+  et comptent en bonus si tu les coches.
+- ‹ › pour revenir sur une semaine passée et rattraper un oubli.
+- Clic sur le nom d'une habitude : la modifier (jours prévus, emoji) ou la supprimer.
+
 ## Notes
 
 Un bloc-notes libre, enregistré automatiquement pendant la frappe (indicateur « Enregistré »).
@@ -78,7 +91,7 @@ Sans épingle, Fluo propose les tâches les plus urgentes.
 ## Tests
 
 ```bash
-npm test           # tests du parseur de saisie rapide et des récurrences
+npm test           # tests : saisie rapide, récurrences, habitudes
 npm run typecheck  # vérification des types sur tout le projet
 ```
 
@@ -97,6 +110,16 @@ data/     base de données (ignorée par git)
 2. `npm run db:generate` → crée une migration SQL dans `server/drizzle/`
 3. Relancer : les migrations s'appliquent automatiquement au démarrage.
 
+## Bonus : accès depuis un téléphone sur le Wi-Fi de la maison
+
+```bash
+npm run reseau
+```
+
+Un QR code s'affiche dans le terminal : scanne-le avec l'appareil photo du téléphone (même Wi-Fi).
+Fluo reste protégé par une clé d'accès (dans `data/cle-acces.txt`, à supprimer pour révoquer tous
+les appareils). L'ordinateur doit rester allumé, écran ouvert.
+
 ## Variables d'environnement (optionnelles)
 
 | Variable | Défaut | Rôle |
@@ -105,3 +128,4 @@ data/     base de données (ignorée par git)
 | `HOST` | `127.0.0.1` | `0.0.0.0` pour l'ouvrir au réseau local |
 | `DATA_DIR` | `./data` | dossier de la base |
 | `APP_TZ` | `Europe/Paris` | fuseau utilisé pour « aujourd'hui » |
+| `FLUO_TRUST_LOCALHOST` | `true` | `false` derrière un proxy (hébergement) : voir `server/src/config.ts` |

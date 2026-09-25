@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Version pleine (iPhone, Android « maskable ») : le système découpe lui-même les coins ; le F reste dans la zone sûre centrale -->
+  <rect width="512" height="512" fill="#FF9F3A"/>
+  <path d="M190 138h150v58h-88v44h76v58h-76v94h-62z" fill="#1C2230"/>
+</svg>

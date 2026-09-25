@@ -1,0 +1,110 @@
+.nameRow {
+  display: flex;
+  gap: 0.5rem;
+}
+.emoji,
+.name {
+  min-height: 48px;
+  border: 1.5px solid var(--line);
+  border-radius: 12px;
+  background: var(--surface);
+  font-size: 1.0625rem;
+}
+.emoji {
+  flex: none;
+  width: 3.5rem;
+  text-align: center;
+}
+.name {
+  flex: 1;
+  min-width: 0;
+  padding: 0 0.875rem;
+}
+.emoji:focus,
+.name:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.field {
+  margin: 1.25rem 0 0;
+  padding: 0;
+  border: 0;
+}
+.field legend {
+  margin-bottom: 0.5rem;
+  padding: 0;
+  color: var(--ink-2);
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+.presets {
+  display: flex;
+  gap: 0.375rem;
+  margin-bottom: 0.625rem;
+}
+.preset {
+  min-height: 38px;
+  padding: 0 0.875rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: none;
+  cursor: pointer;
+}
+.preset[aria-pressed='true'] {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  font-weight: 700;
+}
+.days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.25rem;
+}
+.day {
+  min-height: 42px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--surface);
+  font-weight: 700;
+  cursor: pointer;
+}
+.day[aria-pressed='true'] {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: var(--on-accent);
+}
+.help {
+  margin: 1rem 0 0;
+  color: var(--ink-3);
+  font-size: 0.8125rem;
+}
+
+.primary,
+.danger {
+  min-height: 46px;
+  padding: 0 1.125rem;
+  border-radius: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.primary {
+  flex: 1;
+  border: 0;
+  background: var(--accent);
+  color: var(--on-accent);
+}
+.primary:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+.danger {
+  border: 1px solid var(--line);
+  background: none;
+  color: var(--danger);
+}
+.confirm {
+  border-color: var(--danger);
+  background: var(--danger);
+  color: #fff;
+}

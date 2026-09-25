@@ -15,7 +15,7 @@ export const categoryFilterStore = createStore<string | null>(null);
 export const openTaskStore = createStore<string | null>(null);
 
 /** Section affichée sur mobile (barre d'onglets du bas). */
-export type SectionKey = 'tasks' | 'shopping' | 'notes';
+export type SectionKey = 'tasks' | 'habits' | 'shopping' | 'notes';
 export const sectionStore = createStore<SectionKey>('tasks');
 
 /** Demande de focus sur le champ d'ajout des courses (raccourci C). */

@@ -1,5 +1,7 @@
 import s from './App.module.css';
 import { BottomNav } from './components/BottomNav';
+import { GoalsPanel } from './components/GoalsPanel';
+import { HabitsPanel } from './components/HabitsPanel';
 import { Header } from './components/Header';
 import { NotesPanel } from './components/NotesPanel';
 import { ShoppingList } from './components/ShoppingList';
@@ -30,7 +32,9 @@ export function App() {
           <main>
             <TasksPage />
           </main>
-          <aside className={s.aside} aria-label="Courses et notes">
+          <aside className={s.aside} aria-label="Semaine, courses et notes">
+            <GoalsPanel />
+            <HabitsPanel />
             <ShoppingList />
             <NotesPanel />
           </aside>
@@ -40,6 +44,12 @@ export function App() {
         <>
           <main>
             {section === 'tasks' && <TasksPage />}
+            {section === 'habits' && (
+              <div className={s.stack}>
+                <GoalsPanel />
+                <HabitsPanel />
+              </div>
+            )}
             {section === 'shopping' && <ShoppingList />}
             {section === 'notes' && <NotesPanel fill />}
           </main>

@@ -6,6 +6,6 @@ export default defineConfig({
   server: {
     port: 5173,
     // En dev, les appels /api sont relayés vers le serveur Hono.
-    proxy: { '/api': 'http://127.0.0.1:3000' },
+    proxy: { '/api': 'http://127.0.0.1:3000', '/manifest.webmanifest': 'http://127.0.0.1:3000' },
   },
 });

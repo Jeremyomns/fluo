@@ -50,3 +50,13 @@ export function makeISO(year: number, month: number, day: number): string | null
   if (d.getUTCFullYear() !== year || d.getUTCMonth() !== month - 1 || d.getUTCDate() !== day) return null;
   return d.toISOString().slice(0, 10);
 }
+
+/** Lundi de la semaine contenant `iso` (les semaines commencent le lundi). */
+export const weekStartISO = (iso: string) => addDaysISO(iso, -((weekdayISO(iso) + 6) % 7));
+
+/** Numéro de semaine ISO 8601 (semaine 1 = celle qui contient le premier jeudi de l'année). */
+export function isoWeekNumber(iso: string): number {
+  const thursday = addDaysISO(weekStartISO(iso), 3);
+  const jan1 = `${thursday.slice(0, 4)}-01-01`;
+  return Math.floor(diffDaysISO(jan1, thursday) / 7) + 1;
+}

@@ -5,7 +5,7 @@
   right: 0;
   bottom: 0;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   padding: 0.375rem 0.5rem calc(env(safe-area-inset-bottom, 0px) + 0.375rem);
   border-top: 1px solid var(--line);
   background: color-mix(in srgb, var(--bg) 88%, transparent);
@@ -40,7 +40,7 @@
   position: relative;
   display: grid;
   place-items: center;
-  width: 56px;
+  width: 52px;
   height: 30px;
   border-radius: 999px;
   transition: background-color 0.2s var(--ease-out);
