@@ -12,10 +12,10 @@
   --on-accent: #ffffff;
   --danger: #c3362b;      /* rouge : en retard */
   --danger-soft: #f8e1de;
-  --stabilo: #f6de4b;     /* surligneur : réservé au focus du jour */
-  --on-stabilo: #1c2230;  /* texte sur surligneur, identique en mode sombre */
-  --on-stabilo-line: #a8901a;
-  --toast-action: #f6de4b;
+  --fluo: #ff9f3a;      /* orange fluo : la couleur signature, réservée au focus du jour */
+  --on-fluo: #1c2230;   /* texte sur fluo, identique en mode sombre */
+  --fluo-line: #b85f14; /* contour d'étoile sur fond fluo */
+  --toast-action: #ff9f3a;
 
   --font-display: 'Bricolage Grotesque Variable', 'Avenir Next', system-ui, sans-serif;
   --font-body: 'Atkinson Hyperlegible Next Variable', system-ui, -apple-system, 'Segoe UI', sans-serif;
@@ -40,7 +40,7 @@
     --on-accent: #0f1a14;
     --danger: #f0685c;
     --danger-soft: #3a1f1d;
-    --stabilo: #d9be3a;
+    --fluo: #f59535;
     --toast-action: #2e6a4f;
     --shadow-float: 0 10px 30px rgb(0 0 0 / 0.5);
     color-scheme: dark;
@@ -59,7 +59,7 @@
   --on-accent: #0f1a14;
   --danger: #f0685c;
   --danger-soft: #3a1f1d;
-  --stabilo: #d9be3a;
+  --fluo: #f59535;
   --toast-action: #2e6a4f;
   --shadow-float: 0 10px 30px rgb(0 0 0 / 0.5);
   color-scheme: dark;

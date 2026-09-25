@@ -32,8 +32,8 @@
   color: var(--ink);
 }
 .item[aria-current='page'] .iconWrap {
-  background: var(--stabilo);
-  color: var(--on-stabilo);
+  background: var(--fluo);
+  color: var(--on-fluo);
 }
 
 .iconWrap {

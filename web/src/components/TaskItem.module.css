@@ -256,7 +256,7 @@
   stroke: currentColor;
 }
 .star:hover {
-  background: color-mix(in srgb, var(--stabilo) 30%, transparent);
+  background: color-mix(in srgb, var(--fluo) 30%, transparent);
   color: var(--ink);
 }
 .starOn {
@@ -264,8 +264,8 @@
   color: var(--ink);
 }
 .starOn svg {
-  fill: var(--stabilo);
-  stroke: var(--on-stabilo-line);
+  fill: var(--fluo);
+  stroke: var(--fluo-line);
 }
 @media (hover: none) {
   .action {

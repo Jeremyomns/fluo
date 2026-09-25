@@ -151,13 +151,13 @@
   border-color: var(--ink-3);
 }
 .focusBtn[aria-pressed='true'] {
-  border-color: var(--stabilo);
-  background: var(--stabilo);
-  color: var(--on-stabilo);
+  border-color: var(--fluo);
+  background: var(--fluo);
+  color: var(--on-fluo);
 }
 .focusBtn[aria-pressed='true'] svg {
-  fill: var(--on-stabilo);
-  stroke: var(--on-stabilo);
+  fill: var(--on-fluo);
+  stroke: var(--on-fluo);
 }
 .kbd {
   padding: 0 0.375rem;
