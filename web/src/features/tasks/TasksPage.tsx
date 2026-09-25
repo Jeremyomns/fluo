@@ -11,6 +11,7 @@ import { useStore } from '../../lib/store';
 import { categoryFilterStore, type ViewKey, viewStore } from '../../lib/uiState';
 import { LaterView } from './LaterView';
 import { TodayView } from './TodayView';
+import { useTaskKeyboard } from './useTaskKeyboard';
 import { WeekView } from './WeekView';
 
 export function TasksPage() {
@@ -21,6 +22,7 @@ export function TasksPage() {
   const deleting = useStore(pendingDeletes);
   const { data, isPending, isError, refetch } = useAllTasks();
   const [managing, setManaging] = useState(false);
+  useTaskKeyboard(today);
 
   // Changement de jour : les tâches de demain deviennent celles d'aujourd'hui.
   useEffect(() => {
@@ -48,6 +50,12 @@ export function TasksPage() {
     counts[viewOfDate(t.dueDate, today)]++;
     if (isOverdue(t, today)) overdue++;
   }
+
+  // Onglet du navigateur : « (3) Fluo » s'il reste des tâches pour aujourd'hui
+  const todayLeft = allSorted.filter((t) => !t.completedAt && viewOfDate(t.dueDate, today) === 'today').length;
+  useEffect(() => {
+    document.title = todayLeft > 0 ? `(${todayLeft}) Fluo` : 'Fluo';
+  }, [todayLeft]);
 
   const status = { isPending, isError, retry: () => void refetch() };
   const props = { tasks, today, status };

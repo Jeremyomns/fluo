@@ -17,7 +17,15 @@ npm run dev        # développement → http://localhost:5173 (rechargement à c
 npm start          # usage quotidien → http://localhost:3000 (compile le front puis sert tout)
 ```
 
-Les données sont dans `data/fluo.db` (créé au premier lancement). Pour sauvegarder, copie ce fichier.
+Les données sont dans `data/fluo.db` (créé au premier lancement).
+
+## Sauvegarde
+
+En bas de page, **Sauvegarde et réglages** :
+- **Télécharger la sauvegarde** : un fichier JSON avec toutes tes données (à garder hors de l'ordinateur).
+- **Restaurer une sauvegarde** : remplace toutes les données par celles du fichier. Avant chaque restauration,
+  une copie de la base est gardée dans `data/sauvegardes/` (les 10 dernières).
+  Un fichier abîmé est refusé sans rien modifier.
 
 ## Raccourcis
 
@@ -27,10 +35,18 @@ Les données sont dans `data/fluo.db` (créé au premier lancement). Pour sauveg
 | `1` `2` `3` | Aujourd'hui / Semaine / Plus tard |
 | `C` | courses : ajouter un article |
 | `T` | mode clair / sombre |
-| `F` | (panneau ouvert) ajouter / retirer du focus du jour |
+| `?` | aide des raccourcis |
+| `J` / `K` | tâche suivante / précédente |
+| `X` (ou Espace) | cocher / décocher la tâche sélectionnée |
+| `Entrée` | ouvrir le détail de la tâche sélectionnée |
+| `F` | focus du jour (tâche sélectionnée ou panneau ouvert) |
+| `D` | reporter la tâche sélectionnée à demain |
+| `Suppr` | supprimer la tâche sélectionnée (5 s pour annuler) |
 | `Échap` | quitter le champ ou fermer le panneau |
 | clic sur une tâche | ouvrir le détail (date, priorité, catégorie, notes) |
 | glisser une tâche | réordonner (appui long sur mobile) |
+
+Sur téléphone : **glisser une tâche vers la droite** la coche, **vers la gauche** la reporte à demain.
 
 ## Saisie rapide
 

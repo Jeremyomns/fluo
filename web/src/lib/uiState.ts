@@ -20,3 +20,7 @@ export const sectionStore = createStore<SectionKey>('tasks');
 
 /** Demande de focus sur le champ d'ajout des courses (raccourci C). */
 export const focusShoppingStore = createStore(false);
+
+/** Panneaux ouverts depuis le pied de page ou un raccourci. */
+export const settingsOpenStore = createStore(false);
+export const helpOpenStore = createStore(false);

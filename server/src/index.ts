@@ -10,6 +10,7 @@ import { dbPath, runMigrations } from './db/client';
 import { seedIfEmpty } from './db/seed';
 import { HttpError } from './http';
 import { keepMacAwake, lanAddresses, printQr } from './network';
+import { backupRoutes } from './routes/backup';
 import { categoriesRoutes } from './routes/categories';
 import { goalsRoutes } from './routes/goals';
 import { habitsRoutes } from './routes/habits';
@@ -35,6 +36,7 @@ app.route('/api/shopping', shoppingRoutes);
 app.route('/api/notes', notesRoutes);
 app.route('/api/habits', habitsRoutes);
 app.route('/api/goals', goalsRoutes);
+app.route('/api', backupRoutes); // /api/export et /api/import
 app.all('/api/*', (c) => c.json({ error: 'Route inconnue' }, 404));
 
 // ---------- Installation sur l'écran d'accueil ----------

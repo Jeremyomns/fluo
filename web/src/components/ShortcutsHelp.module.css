@@ -1,0 +1,45 @@
+.group {
+  margin-bottom: 1.25rem;
+}
+.h {
+  margin: 0 0 0.5rem;
+  color: var(--ink-2);
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+.list {
+  margin: 0;
+}
+.item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  min-height: 38px;
+  border-top: 1px solid var(--line);
+}
+.item dt {
+  display: flex;
+  gap: 0.25rem;
+  width: 6.5rem;
+  flex: none;
+}
+.item dd {
+  margin: 0;
+}
+.kbd {
+  min-width: 1.75rem;
+  padding: 0.125rem 0.375rem;
+  border: 1px solid var(--line);
+  border-bottom-width: 2px;
+  border-radius: 6px;
+  background: var(--surface);
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  text-align: center;
+}
+.tip {
+  margin: 0.5rem 0 0;
+  color: var(--ink-3);
+  font-size: 0.875rem;
+}

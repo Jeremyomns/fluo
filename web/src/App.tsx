@@ -1,5 +1,6 @@
 import s from './App.module.css';
 import { BottomNav } from './components/BottomNav';
+import { Footer } from './components/Footer';
 import { GoalsPanel } from './components/GoalsPanel';
 import { HabitsPanel } from './components/HabitsPanel';
 import { Header } from './components/Header';
@@ -56,6 +57,7 @@ export function App() {
           <BottomNav />
         </>
       )}
+      <Footer />
       <TaskDetail />
       <Toaster />
     </div>
