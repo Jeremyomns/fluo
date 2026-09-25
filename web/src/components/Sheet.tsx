@@ -1,4 +1,5 @@
 import { type ReactNode, useEffect, useId, useRef } from 'react';
+import { createPortal } from 'react-dom';
 import s from './Sheet.module.css';
 
 interface Props {
@@ -25,7 +26,9 @@ export function Sheet({ title, onClose, children, footer }: Props) {
 
   const close = () => ref.current?.close();
 
-  return (
+  // Rendu à la racine du document : le panneau garde les couleurs de base,
+  // même ouvert depuis la colonne bleu nuit (qui redéfinit ses propres couleurs).
+  return createPortal(
     <dialog
       ref={ref}
       className={s.sheet}
@@ -47,6 +50,7 @@ export function Sheet({ title, onClose, children, footer }: Props) {
         <div className={s.body}>{children}</div>
         {footer && <footer className={s.foot}>{footer}</footer>}
       </div>
-    </dialog>
+    </dialog>,
+    document.body,
   );
 }

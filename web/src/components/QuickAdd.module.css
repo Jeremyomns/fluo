@@ -10,8 +10,8 @@
   width: 100%;
   height: 56px;
   padding: 0 4.5rem 0 3rem;
-  border: 1.5px solid var(--line);
-  border-radius: var(--radius-m);
+  border: 1.5px solid transparent;
+  border-radius: 16px;
   background: var(--surface);
   font-size: 1.0625rem; /* ≥ 16px : pas de zoom automatique sur iOS */
   transition: border-color 0.15s, box-shadow 0.15s;

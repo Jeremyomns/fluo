@@ -5,6 +5,7 @@ import { GoalsPanel } from './components/GoalsPanel';
 import { HabitsPanel } from './components/HabitsPanel';
 import { Header } from './components/Header';
 import { NotesPanel } from './components/NotesPanel';
+import { Ribbon } from './components/Ribbon';
 import { ShoppingList } from './components/ShoppingList';
 import { TaskDetail } from './components/TaskDetail';
 import { Toaster } from './components/Toaster';
@@ -26,6 +27,7 @@ export function App() {
 
   return (
     <div className={s.shell}>
+      <Ribbon />
       <Header />
       {wide ? (
         // Ordinateur : tâches à gauche, courses et notes toujours visibles à droite

@@ -27,6 +27,13 @@ En bas de page, **Sauvegarde et réglages** :
   une copie de la base est gardée dans `data/sauvegardes/` (les 10 dernières).
   Un fichier abîmé est refusé sans rien modifier.
 
+## Identité visuelle
+
+Direction « Aplats » : fond bleu très pâle, focus du jour sur un aplat orange fluo, colonne latérale
+bleu nuit, onglets et filtres en pastilles, ruban orange et bleu dans l'en-tête. Mode sombre presque noir
+où l'orange « s'allume ». Toutes les couleurs sont des variables dans `web/src/styles/global.css`
+(`--fluo` pour la couleur signature, `--panel` pour le bleu nuit…).
+
 ## Raccourcis
 
 | Touche | Action |

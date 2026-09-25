@@ -1,4 +1,6 @@
 .shell {
+  position: relative;
+  isolation: isolate; /* le ruban (z-index négatif) reste au-dessus du fond de page */
   max-width: 44rem;
   margin: 0 auto;
   padding: calc(env(safe-area-inset-top, 0px) + 1.5rem) 1rem calc(env(safe-area-inset-bottom, 0px) + 7rem);
@@ -25,19 +27,40 @@
   }
   .columns {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) 21rem;
-    gap: 4rem;
+    grid-template-columns: minmax(0, 1fr) 22.5rem;
+    gap: 3rem;
     align-items: start;
   }
+  /* Colonne latérale : un aplat bleu nuit.
+     Les couleurs y sont redéfinies, les composants à l'intérieur s'adaptent seuls. */
   .aside {
+    --ink: #ffffff;
+    --ink-2: rgb(255 255 255 / 0.74);
+    --ink-3: rgb(255 255 255 / 0.55);
+    --line: rgb(255 255 255 / 0.14);
+    --surface: var(--panel-surface);
+    --bg: rgb(255 255 255 / 0.08);
+    --row-hover: rgb(255 255 255 / 0.07);
+    --accent: var(--fluo); /* cases cochées en orange sur le bleu */
+    --on-accent: var(--on-fluo);
+    --accent-soft: rgb(255 255 255 / 0.12);
+    --danger: #ff8a80;
+    --danger-soft: rgb(255 138 128 / 0.16);
+
     position: sticky;
     top: 1.5rem;
     display: grid;
     gap: 2.5rem;
     max-height: calc(100dvh - 3rem);
     overflow-y: auto;
-    padding: 0.25rem 0.25rem 1rem; /* pour ne pas couper les anneaux de focus */
-    margin: -0.25rem;
+    padding: 1.75rem 1.625rem 2rem;
+    border-radius: 28px;
+    background: var(--panel);
+    color: var(--ink);
     scrollbar-width: thin;
+    scrollbar-color: rgb(255 255 255 / 0.25) transparent;
+  }
+  .aside :focus-visible {
+    outline-color: var(--fluo);
   }
 }

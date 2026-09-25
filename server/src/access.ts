@@ -52,13 +52,13 @@ const LOCKED_PAGE = `<!doctype html>
 <html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Fluo · accès protégé</title>
 <style>
-  body{margin:0;min-height:100dvh;display:grid;place-items:center;background:#eef0eb;color:#1c2230;
+  body{margin:0;min-height:100dvh;display:grid;place-items:center;background:#dce1f3;color:#121a45;
        font:17px/1.5 system-ui,-apple-system,sans-serif;padding:24px;box-sizing:border-box}
   main{max-width:26rem}
   h1{margin:0 0 .5rem;font-size:1.6rem}
   mark{background:linear-gradient(transparent 45%,#ff9f3a 45%,#ff9f3a 90%,transparent 90%);color:inherit;padding:0 .15em}
   code{background:#fff;padding:.1em .4em;border-radius:6px}
-  @media (prefers-color-scheme:dark){body{background:#15181d;color:#e6e8ec}code{background:#1d2128}}
+  @media (prefers-color-scheme:dark){body{background:#0f1013;color:#f2efe9}code{background:#1a1c22}}
 </style></head>
 <body><main>
   <h1>🔒 <mark>Fluo</mark> est protégé</h1>

@@ -1,66 +1,85 @@
-/* ---------- Jetons de design ---------- */
+/* ---------- Jetons de design ----------
+   Direction « Aplats » : aplats de couleur francs, orange fluo + bleu nuit, fond bleu très pâle.
+   Toute l'identité passe par ces variables (mode clair ici, mode sombre plus bas). */
 :root {
-  --bg: #eef0eb;          /* papier gris-vert, calme le matin */
+  --bg: #dce1f3;           /* bleu très pâle */
   --surface: #ffffff;
-  --ink: #1c2230;         /* encre bleu nuit */
-  --ink-2: #5e6676;
-  --ink-3: #8a91a0;
-  --line: #dcdfd8;
-  --row-hover: #f5f6f2;
-  --accent: #2e6a4f;      /* vert sapin : « fait » */
-  --accent-soft: #d7e8de;
+  --ink: #121a45;          /* encre bleu nuit */
+  --ink-2: #48507a;
+  --ink-3: #6c749c;
+  --line: #e3e7f5;
+  --row-hover: #f3f5fc;
+  --accent: #1d2b7a;       /* « fait », progression, boutons principaux */
+  --accent-soft: #e3e8f8;
   --on-accent: #ffffff;
-  --danger: #c3362b;      /* rouge : en retard */
-  --danger-soft: #f8e1de;
-  --fluo: #ff9f3a;      /* orange fluo : la couleur signature, réservée au focus du jour */
-  --on-fluo: #1c2230;   /* texte sur fluo, identique en mode sombre */
-  --fluo-line: #b85f14; /* contour d'étoile sur fond fluo */
+  --danger: #c8241a;       /* rouge : en retard (bien distinct de l'orange) */
+  --danger-soft: #fbe3e1;
+  --fluo: #ff9f3a;         /* orange fluo : la couleur signature (focus du jour) */
+  --on-fluo: #121a45;      /* texte sur fluo */
+  --fluo-line: #b85f14;    /* contour d'étoile sur fond fluo */
+  --panel: #1d2b7a;        /* panneau bleu nuit (colonne latérale, barre d'onglets mobile) */
+  --panel-surface: #28378f;
+  --pill: #1d2b7a;         /* onglet / filtre actif */
+  --on-pill: #ffffff;
   --toast-action: #ff9f3a;
 
   --font-display: 'Bricolage Grotesque Variable', 'Avenir Next', system-ui, sans-serif;
   --font-body: 'Atkinson Hyperlegible Next Variable', system-ui, -apple-system, 'Segoe UI', sans-serif;
-  --radius-s: 8px;
-  --radius-m: 14px;
+  --display-weight: 800;
+  --display-tracking: -0.035em;
+  --radius-s: 10px;
+  --radius-m: 20px;
+  --radius-l: 24px;
   --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
-  --shadow-float: 0 10px 30px rgb(28 34 48 / 0.18);
+  --shadow-float: 0 12px 32px rgb(18 26 69 / 0.18);
   color-scheme: light;
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme='light']) {
-    --bg: #15181d;
-    --surface: #1d2128;
-    --ink: #e6e8ec;
-    --ink-2: #a0a7b3;
-    --ink-3: #6f7784;
-    --line: #2d323b;
-    --row-hover: #242932;
-    --accent: #5db38a;
-    --accent-soft: #1f3a2e;
-    --on-accent: #0f1a14;
-    --danger: #f0685c;
+    --bg: #0f1013;           /* presque noir : l'orange s'y « allume » */
+    --surface: #1a1c22;
+    --ink: #f2efe9;
+    --ink-2: #a9acb5;
+    --ink-3: #777b86;
+    --line: #2a2d35;
+    --row-hover: #22252c;
+    --accent: #f2efe9;       /* « fait » : pastille claire, coche foncée */
+    --accent-soft: #2a2e3a;
+    --on-accent: #0f1013;
+    --danger: #ff6154;
     --danger-soft: #3a1f1d;
-    --fluo: #f59535;
-    --toast-action: #2e6a4f;
+    --fluo: #ff9f3a;
+    --on-fluo: #0f1013;
+    --panel: #18215a;        /* bleu nuit profond */
+    --panel-surface: #212c6e;
+    --pill: #f2efe9;         /* onglet / filtre actif inversé */
+    --on-pill: #0f1013;
+    --toast-action: #b85f14;
     --shadow-float: 0 10px 30px rgb(0 0 0 / 0.5);
     color-scheme: dark;
   }
 }
 :root[data-theme='dark'] {
-  --bg: #15181d;
-  --surface: #1d2128;
-  --ink: #e6e8ec;
-  --ink-2: #a0a7b3;
-  --ink-3: #6f7784;
-  --line: #2d323b;
-  --row-hover: #242932;
-  --accent: #5db38a;
-  --accent-soft: #1f3a2e;
-  --on-accent: #0f1a14;
-  --danger: #f0685c;
+  --bg: #0f1013;           /* presque noir : l'orange s'y « allume » */
+  --surface: #1a1c22;
+  --ink: #f2efe9;
+  --ink-2: #a9acb5;
+  --ink-3: #777b86;
+  --line: #2a2d35;
+  --row-hover: #22252c;
+  --accent: #f2efe9;       /* « fait » : pastille claire, coche foncée */
+  --accent-soft: #2a2e3a;
+  --on-accent: #0f1013;
+  --danger: #ff6154;
   --danger-soft: #3a1f1d;
-  --fluo: #f59535;
-  --toast-action: #2e6a4f;
+  --fluo: #ff9f3a;
+  --on-fluo: #0f1013;
+  --panel: #18215a;        /* bleu nuit profond */
+  --panel-surface: #212c6e;
+  --pill: #f2efe9;         /* onglet / filtre actif inversé */
+  --on-pill: #0f1013;
+  --toast-action: #b85f14;
   --shadow-float: 0 10px 30px rgb(0 0 0 / 0.5);
   color-scheme: dark;
 }

@@ -146,7 +146,7 @@ function FocusCard({ task, today, category, onToggle, onUnpin }: CardProps) {
         </svg>
       </button>
       <button type="button" className={s.body} onClick={() => openTaskStore.set(task.id)}>
-        {/* le span surligné doit rester « inline » (dans un bloc) pour suivre chaque ligne */}
+        {/* titre sur la carte blanche : le bloc orange porte déjà la couleur signature */}
         <span className={s.titleBlock}>
           <span className={s.hl}>{task.title}</span>
         </span>

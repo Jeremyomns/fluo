@@ -1,7 +1,7 @@
 import { useCallback, useState } from 'react';
 
 export type Theme = 'light' | 'dark';
-const THEME_COLORS: Record<Theme, string> = { light: '#EEF0EB', dark: '#15181D' };
+const THEME_COLORS: Record<Theme, string> = { light: '#DCE1F3', dark: '#0F1013' };
 
 function currentTheme(): Theme {
   const t = document.documentElement.dataset.theme;

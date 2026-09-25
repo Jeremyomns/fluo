@@ -1,0 +1,27 @@
+/* Derrière l'en-tête, entre le « Bonjour » et le bouton de thème : jamais sous du texte */
+.ribbon {
+  position: absolute;
+  z-index: -1;
+  top: calc(env(safe-area-inset-top, 0px) + 1.25rem);
+  right: 3.5rem; /* laisse la place au bouton de thème */
+  width: min(36vw, 170px);
+  height: auto;
+  pointer-events: none;
+}
+
+@media (min-width: 640px) {
+  .ribbon {
+    top: 2.75rem;
+    right: 5rem;
+    width: min(36vw, 360px);
+  }
+}
+
+@media (min-width: 1024px) {
+  .ribbon {
+    top: 0.75rem;
+    right: auto;
+    left: 38%;
+    width: 450px;
+  }
+}

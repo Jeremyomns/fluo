@@ -9,10 +9,10 @@
 .greeting {
   margin: 0;
   font-family: var(--font-display);
-  font-weight: 700;
-  font-size: clamp(2.25rem, 8vw, 3.25rem);
-  line-height: 1;
-  letter-spacing: -0.035em;
+  font-weight: var(--display-weight);
+  font-size: clamp(2.5rem, 9vw, 4.25rem);
+  line-height: 0.95;
+  letter-spacing: var(--display-tracking);
 }
 
 .date {
@@ -27,14 +27,13 @@
   place-items: center;
   width: 44px;
   height: 44px;
-  border: 1px solid var(--line);
+  border: 0;
   border-radius: 50%;
   background: var(--surface);
-  color: var(--ink-2);
+  color: var(--ink);
   cursor: pointer;
   transition: color 0.15s, border-color 0.15s;
 }
 .themeBtn:hover {
-  color: var(--ink);
-  border-color: var(--ink-3);
+  box-shadow: inset 0 0 0 1.5px var(--ink-3);
 }

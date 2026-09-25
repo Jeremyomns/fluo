@@ -6,9 +6,9 @@
 }
 .progress {
   flex: 1;
-  height: 4px;
-  border-radius: 4px;
-  background: var(--line);
+  height: 6px;
+  border-radius: 6px;
+  background: var(--surface);
   overflow: hidden;
 }
 .progressFill {
@@ -25,11 +25,12 @@
 }
 
 .groupTitle {
-  margin: 1rem 0 0.5rem;
+  margin: 1.125rem 0 0.5rem;
   color: var(--ink-2);
-  font-family: var(--font-body);
-  font-size: 0.9375rem;
+  font-family: var(--font-display);
+  font-size: 1rem;
   font-weight: 700;
+  letter-spacing: -0.01em;
 }
 .danger {
   color: var(--danger);
@@ -67,7 +68,7 @@
 .state {
   margin-top: 0.25rem;
   padding: 2.5rem 1rem;
-  border: 1.5px dashed var(--line);
+  border: 2px dashed color-mix(in srgb, var(--ink-3) 45%, transparent);
   border-radius: var(--radius-m);
   color: var(--ink-2);
   text-align: center;
@@ -79,8 +80,9 @@
   margin-bottom: 0.25rem !important;
   color: var(--ink);
   font-family: var(--font-display);
-  font-size: 1.1875rem;
-  font-weight: 600;
+  font-size: 1.25rem;
+  font-weight: var(--display-weight);
+  letter-spacing: var(--display-tracking);
 }
 .retry {
   margin-top: 1rem;
