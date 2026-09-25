@@ -1,0 +1,71 @@
+.region {
+  /* annule les styles par défaut d'un popover */
+  inset: auto;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  overflow: visible;
+
+  position: fixed;
+  left: 50%;
+  bottom: calc(env(safe-area-inset-bottom, 0px) + 1rem);
+  translate: -50% 0;
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  width: min(28rem, calc(100vw - 2rem));
+  pointer-events: none;
+}
+
+.toast {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  width: 100%;
+  min-height: 48px;
+  padding: 0.5rem 0.5rem 0.5rem 1rem;
+  border-radius: 12px;
+  background: var(--ink);
+  color: var(--bg);
+  box-shadow: var(--shadow-float);
+  font-size: 0.9375rem;
+  pointer-events: auto;
+  animation: rise 0.22s var(--ease-out);
+}
+.error {
+  background: var(--danger);
+  color: #fff;
+}
+
+.action {
+  flex: none;
+  min-height: 36px;
+  padding: 0 0.75rem;
+  border: 0;
+  border-radius: 8px;
+  background: none;
+  color: var(--toast-action);
+  font-weight: 700;
+  cursor: pointer;
+}
+.action:hover {
+  background: color-mix(in srgb, var(--toast-action) 15%, transparent);
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+
+/* Au-dessus de la barre d'onglets du bas (mobile / tablette) */
+@media (max-width: 1023px) {
+  .region {
+    bottom: calc(env(safe-area-inset-bottom, 0px) + 5rem);
+  }
+}

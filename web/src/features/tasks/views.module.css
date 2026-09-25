@@ -1,0 +1,111 @@
+.progressRow {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+}
+.progress {
+  flex: 1;
+  height: 4px;
+  border-radius: 4px;
+  background: var(--line);
+  overflow: hidden;
+}
+.progressFill {
+  height: 100%;
+  border-radius: inherit;
+  background: var(--accent);
+  transition: width 0.45s var(--ease-out);
+}
+.count {
+  color: var(--ink-2);
+  font-size: 0.875rem;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.groupTitle {
+  margin: 1rem 0 0.5rem;
+  color: var(--ink-2);
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+  font-weight: 700;
+}
+.danger {
+  color: var(--danger);
+}
+
+.doneBlock {
+  margin-top: 1rem;
+}
+.doneToggle {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  min-height: 44px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--ink-2);
+  font-size: 0.9375rem;
+  cursor: pointer;
+}
+.doneToggle:hover {
+  color: var(--ink);
+}
+.chevron {
+  transition: rotate 0.2s var(--ease-out);
+}
+.doneToggle[aria-expanded='true'] .chevron {
+  rotate: 90deg;
+}
+.doneToggle + ul {
+  margin-top: 0.25rem;
+}
+
+/* ---- États vides, erreur, chargement ---- */
+.state {
+  margin-top: 0.25rem;
+  padding: 2.5rem 1rem;
+  border: 1.5px dashed var(--line);
+  border-radius: var(--radius-m);
+  color: var(--ink-2);
+  text-align: center;
+}
+.state p {
+  margin: 0;
+}
+.stateTitle {
+  margin-bottom: 0.25rem !important;
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-size: 1.1875rem;
+  font-weight: 600;
+}
+.retry {
+  margin-top: 1rem;
+  min-height: 44px;
+  padding: 0 1.25rem;
+  border: 1.5px solid var(--ink);
+  border-radius: 999px;
+  background: none;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.skeleton {
+  display: grid;
+  gap: 0.5rem;
+}
+.skeleton span {
+  height: 52px;
+  border-radius: var(--radius-s);
+  background: var(--line);
+  opacity: 0.5;
+  animation: pulse 1.2s ease-in-out infinite alternate;
+}
+@keyframes pulse {
+  to {
+    opacity: 0.2;
+  }
+}

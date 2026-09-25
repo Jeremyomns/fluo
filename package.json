@@ -1,0 +1,27 @@
+{
+  "name": "fluo",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "shared",
+    "server",
+    "web"
+  ],
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "dev": "concurrently -k -n api,web -c cyan,magenta \"npm:dev:api\" \"npm:dev:web\"",
+    "dev:api": "npm run dev -w server",
+    "dev:web": "npm run dev -w web",
+    "build": "npm run build -w web",
+    "start": "npm run build && npm run start -w server",
+    "db:generate": "npm run db:generate -w server",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "test": "tsx --test shared/src/*.test.ts"
+  },
+  "devDependencies": {
+    "concurrently": "^10.0.5",
+    "typescript": "^7.0.2"
+  }
+}

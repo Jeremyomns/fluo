@@ -1,0 +1,38 @@
+.shell {
+  max-width: 44rem;
+  margin: 0 auto;
+  padding: calc(env(safe-area-inset-top, 0px) + 1.5rem) 1rem calc(env(safe-area-inset-bottom, 0px) + 7rem);
+}
+
+@media (min-width: 640px) {
+  .shell {
+    padding-top: 3.5rem;
+    padding-inline: 1.5rem;
+  }
+}
+
+/* Ordinateur : deux colonnes, la colonne de droite reste visible au défilement */
+@media (min-width: 1024px) {
+  .shell {
+    max-width: 78rem;
+    padding-inline: 3rem;
+    padding-bottom: 4rem;
+  }
+  .columns {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 21rem;
+    gap: 4rem;
+    align-items: start;
+  }
+  .aside {
+    position: sticky;
+    top: 1.5rem;
+    display: grid;
+    gap: 2.5rem;
+    max-height: calc(100dvh - 3rem);
+    overflow-y: auto;
+    padding: 0.25rem 0.25rem 1rem; /* pour ne pas couper les anneaux de focus */
+    margin: -0.25rem;
+    scrollbar-width: thin;
+  }
+}

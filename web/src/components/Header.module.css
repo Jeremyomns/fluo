@@ -1,0 +1,40 @@
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 2.25rem;
+}
+
+.greeting {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(2.25rem, 8vw, 3.25rem);
+  line-height: 1;
+  letter-spacing: -0.035em;
+}
+
+.date {
+  margin: 0.5rem 0 0;
+  color: var(--ink-2);
+  font-size: 1.0625rem;
+}
+
+.themeBtn {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: var(--surface);
+  color: var(--ink-2);
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+}
+.themeBtn:hover {
+  color: var(--ink);
+  border-color: var(--ink-3);
+}

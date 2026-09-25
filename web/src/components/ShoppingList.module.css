@@ -1,0 +1,252 @@
+.head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+}
+.title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.375rem;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+}
+.count {
+  color: var(--ink-2);
+  font-size: 0.875rem;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---- Champ d'ajout + suggestions ---- */
+.form {
+  position: relative;
+}
+.input {
+  width: 100%;
+  height: 48px;
+  padding: 0 1rem;
+  border: 1.5px solid var(--line);
+  border-radius: 12px;
+  background: var(--surface);
+  font-size: 1.0625rem;
+}
+.input::placeholder {
+  color: var(--ink-3);
+}
+.input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px var(--accent-soft);
+}
+
+.suggestions {
+  position: absolute;
+  z-index: 10;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  margin: 0;
+  padding: 0.25rem;
+  list-style: none;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--surface);
+  box-shadow: var(--shadow-float);
+}
+.suggestion {
+  display: flex;
+  align-items: center;
+}
+.suggestionPick {
+  flex: 1;
+  min-height: 42px;
+  padding: 0 0.75rem;
+  border: 0;
+  border-radius: 8px;
+  background: none;
+  text-align: left;
+  cursor: pointer;
+}
+.suggestionPick:hover,
+.suggestionPick[aria-selected='true'] {
+  background: var(--accent-soft);
+}
+.forget {
+  flex: none;
+  width: 32px;
+  height: 32px;
+  border: 0;
+  border-radius: 50%;
+  background: none;
+  color: var(--ink-3);
+  font-size: 1.125rem;
+  cursor: pointer;
+}
+.forget:hover {
+  background: var(--danger-soft);
+  color: var(--danger);
+}
+
+.frequent {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.375rem;
+  margin-top: 0.625rem;
+}
+.freqChip {
+  min-height: 34px;
+  padding: 0 0.75rem;
+  border: 1px dashed var(--ink-3);
+  border-radius: 999px;
+  background: none;
+  color: var(--ink-2);
+  font-size: 0.875rem;
+  cursor: pointer;
+}
+.freqChip:hover {
+  border-style: solid;
+  border-color: var(--accent);
+  color: var(--ink);
+}
+
+/* ---- Liste ---- */
+.list {
+  margin: 0.75rem 0 0;
+  padding: 0;
+  list-style: none;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-m);
+  background: var(--surface);
+  overflow: hidden;
+}
+.row {
+  display: flex;
+  align-items: center;
+  border-top: 1px solid var(--line);
+}
+.row:first-child {
+  border-top: 0;
+}
+.toggle {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-height: 48px;
+  padding: 0.25rem 0.875rem;
+  border: 0;
+  background: none;
+  text-align: left;
+  cursor: pointer;
+}
+.toggle:hover {
+  background: var(--row-hover);
+}
+.name {
+  overflow-wrap: anywhere;
+}
+.ring {
+  fill: transparent;
+  stroke: var(--ink-3);
+  stroke-width: 1.75;
+  transition: fill 0.18s, stroke 0.18s;
+}
+.tick {
+  fill: none;
+  stroke: var(--on-accent);
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 13;
+  stroke-dashoffset: 13;
+  transition: stroke-dashoffset 0.2s 0.05s var(--ease-out);
+}
+.checked .ring {
+  fill: var(--accent);
+  stroke: var(--accent);
+}
+.checked .tick {
+  stroke-dashoffset: 0;
+}
+.checked .name {
+  color: var(--ink-3);
+  text-decoration: line-through;
+}
+.remove {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  margin-right: 0.25rem;
+  border: 0;
+  border-radius: 50%;
+  background: none;
+  color: var(--ink-3);
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+.row:hover .remove,
+.remove:focus-visible {
+  opacity: 1;
+}
+.remove:hover {
+  background: var(--danger-soft);
+  color: var(--danger);
+}
+@media (hover: none) {
+  .remove {
+    opacity: 0.5;
+  }
+}
+
+.cartHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 1.25rem;
+}
+.cartTitle {
+  margin: 0;
+  color: var(--ink-2);
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+  font-weight: 700;
+}
+.clear {
+  min-height: 36px;
+  padding: 0 0.75rem;
+  border: 0;
+  border-radius: 8px;
+  background: none;
+  color: var(--ink-2);
+  font-size: 0.875rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+.clear:hover {
+  background: var(--danger-soft);
+  color: var(--danger);
+}
+.cart {
+  margin-top: 0.375rem;
+  background: transparent;
+}
+
+.empty {
+  margin: 0.75rem 0 0;
+  color: var(--ink-2);
+  font-size: 0.9375rem;
+}
+.link {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--accent);
+  font-weight: 700;
+  text-decoration: underline;
+  cursor: pointer;
+}

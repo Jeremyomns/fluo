@@ -1,0 +1,106 @@
+.sheet {
+  /* tiroir à droite (ordinateur) */
+  inset: 0 0 0 auto;
+  width: min(26rem, 100vw);
+  height: 100dvh;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-left: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--ink);
+  box-shadow: var(--shadow-float);
+  animation: slide-left 0.24s var(--ease-out);
+}
+.sheet::backdrop {
+  background: rgb(15 18 24 / 0.35);
+  animation: fade 0.2s ease-out;
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: calc(env(safe-area-inset-top, 0px) + 0.75rem) 0.75rem 0.5rem 1.25rem;
+}
+.title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.125rem;
+  font-weight: 650;
+}
+.close {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 0;
+  border-radius: 50%;
+  background: none;
+  color: var(--ink-2);
+  cursor: pointer;
+}
+.close:hover {
+  background: var(--bg);
+  color: var(--ink);
+}
+
+.body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0.5rem 1.25rem 1.5rem;
+  overscroll-behavior: contain;
+}
+
+.foot {
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem calc(env(safe-area-inset-bottom, 0px) + 0.75rem);
+  border-top: 1px solid var(--line);
+}
+
+/* feuille du bas (mobile) */
+@media (max-width: 640px) {
+  .sheet {
+    inset: auto 0 0 0;
+    width: 100%;
+    height: auto;
+    max-height: 92dvh;
+    border-left: 0;
+    border-radius: 20px 20px 0 0;
+    animation-name: slide-up;
+  }
+  .inner {
+    max-height: 92dvh;
+  }
+  .head {
+    padding-top: 0.75rem;
+  }
+}
+
+@keyframes slide-left {
+  from {
+    transform: translateX(24px);
+    opacity: 0;
+  }
+}
+@keyframes slide-up {
+  from {
+    transform: translateY(40px);
+    opacity: 0;
+  }
+}
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+}
