@@ -59,6 +59,8 @@ writeFileSync(
   JSON.stringify(
     {
       version: 3,
+      // Tâche planifiée : chaque jour à 6 h (UTC) Vercel appelle /api/keepalive pour éviter la mise en veille de Supabase.
+      crons: [{ path: '/api/keepalive', schedule: '0 6 * * *' }],
       routes: [
         // Les fichiers compilés ont un nom unique : mise en cache longue durée.
         { src: '^/assets/(.*)$', headers: { 'cache-control': 'public, max-age=31536000, immutable' }, continue: true },
