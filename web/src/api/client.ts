@@ -1,4 +1,4 @@
-import { accessToken, signOut } from '../lib/auth';
+import { accessToken, recoverSession } from '../lib/auth';
 
 export class ApiError extends Error {
   constructor(
@@ -19,19 +19,28 @@ export async function authHeaders(): Promise<Record<string, string>> {
 
 /** fetch vers /api avec le jeton de connexion, du JSON et des messages d'erreur lisibles. */
 export async function api<T = void>(path: string, { json, headers, ...init }: Options = {}): Promise<T> {
-  let res: Response;
-  try {
-    res = await fetch(`/api${path}`, {
-      ...init,
-      headers: {
-        ...(json !== undefined && { 'Content-Type': 'application/json' }),
-        ...(await authHeaders()),
-        ...headers,
-      },
-      body: json !== undefined ? JSON.stringify(json) : undefined,
-    });
-  } catch {
-    throw new ApiError(0, 'Connexion impossible. Vérifie ta connexion Internet.');
+  const send = async (auth: Record<string, string>) => {
+    try {
+      return await fetch(`/api${path}`, {
+        ...init,
+        headers: {
+          ...(json !== undefined && { 'Content-Type': 'application/json' }),
+          ...auth,
+          ...headers,
+        },
+        body: json !== undefined ? JSON.stringify(json) : undefined,
+      });
+    } catch {
+      throw new ApiError(0, 'Connexion impossible. Vérifie ta connexion Internet.');
+    }
+  };
+
+  let res = await send(await authHeaders());
+  if (res.status === 401) {
+    // Jeton périmé (téléphone en veille…) : on renouvelle la session et on réessaie une fois.
+    const token = await recoverSession();
+    if (!token) throw new ApiError(401, 'Session à renouveler. Vérifie ta connexion Internet.');
+    res = await send({ Authorization: `Bearer ${token}` });
   }
   if (!res.ok) {
     let message = `Erreur ${res.status}`;
@@ -41,7 +50,6 @@ export async function api<T = void>(path: string, { json, headers, ...init }: Op
     } catch {
       /* réponse non JSON */
     }
-    if (res.status === 401) void signOut(); // session expirée ou révoquée : retour à l'écran de connexion
     throw new ApiError(res.status, message);
   }
   return (res.status === 204 ? undefined : await res.json()) as T;

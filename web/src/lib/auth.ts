@@ -45,10 +45,26 @@ export async function accessToken(): Promise<string | undefined> {
   return data.session?.access_token;
 }
 
+/**
+ * Le serveur a refusé le jeton (401). Avant de déconnecter, on tente de renouveler la session :
+ * au réveil du téléphone, le jeton (valable 1 h) est souvent périmé et le réseau pas encore revenu.
+ * Renvoie le nouveau jeton, ou undefined si la session est vraiment perdue.
+ */
+export async function recoverSession(): Promise<string | undefined> {
+  if (!supabase) return undefined;
+  const { data, error } = await supabase.auth.refreshSession();
+  if (data.session) return data.session.access_token;
+  // Problème de réseau passager : on garde la session, on réessaiera plus tard.
+  const transient = !error || error.name === 'AuthRetryableFetchError' || (error.status ?? 0) === 0 || (error.status ?? 0) >= 500;
+  if (!transient) await signOut();
+  return undefined;
+}
+
 /** Version immédiate, pour les envois de dernière seconde à la fermeture de la page. */
 export const currentAccessToken = () => (state.status === 'signedIn' ? state.session.access_token : undefined);
 
+/** Déconnecte cet appareil seulement (les autres restent connectés). */
 export async function signOut() {
-  await supabase?.auth.signOut();
+  await supabase?.auth.signOut({ scope: 'local' });
   setState({ status: 'signedOut' });
 }
