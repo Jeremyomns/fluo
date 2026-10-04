@@ -10,11 +10,12 @@ const DEFAULT_CATEGORIES = [
   { name: 'Santé & sport', emoji: '💪', color: '#C2410C' },
 ];
 
-/** Crée les catégories par défaut au tout premier lancement. */
-export function seedIfEmpty() {
-  const existing = db.select({ id: categories.id }).from(categories).limit(1).all();
+/** Crée les catégories par défaut si la base n'en a aucune (tout premier usage). */
+export async function seedIfEmpty() {
+  const existing = await db.select({ id: categories.id }).from(categories).limit(1);
   if (existing.length) return;
-  db.insert(categories)
+  await db
+    .insert(categories)
     .values(DEFAULT_CATEGORIES.map((c, i) => ({ id: randomUUID(), position: i, ...c })))
-    .run();
+    .onConflictDoNothing();
 }

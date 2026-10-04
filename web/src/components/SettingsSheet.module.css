@@ -4,6 +4,8 @@
 }
 .block + .block {
   padding-top: 1.25rem;
+}
+.block:last-child {
   border-bottom: 0;
 }
 .h {

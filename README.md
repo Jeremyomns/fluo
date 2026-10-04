@@ -3,29 +3,40 @@
 L'organisation perso du quotidien : tâches, courses, notes, habitudes.
 
 Sur ordinateur (écran ≥ 1024 px), objectifs, habitudes, courses et notes restent visibles dans la colonne de droite.
-Sur mobile et tablette, chacun a son onglet en bas de l'écran. Backend Hono + SQLite, frontend Vite + React, tout en TypeScript.
+Sur mobile et tablette, chacun a son onglet en bas de l'écran. Tout en TypeScript.
+
+## Architecture
+
+- **Interface** : React (Vite), **API** : Hono, **base de données** : Postgres chez **Supabase**.
+- **Connexion** : Supabase Auth, par lien magique ou code à 6 chiffres reçu par e-mail.
+  Seules les adresses listées dans `ALLOWED_EMAILS` ont accès.
+- **Hébergement** : **Vercel** (interface + API en fonction serveur, région Paris `cdg1`).
+- Les tables vivent dans le schéma `fluo` de Supabase, avec la sécurité RLS activée :
+  elles ne sont jamais lisibles via la clé publique, seul le serveur de Fluo y accède.
 
 ## Prérequis
 
-Node.js 22 ou plus récent (`node -v` pour vérifier). Sur Mac : `brew install node` ou via nvm.
+Node.js 22 ou plus récent (`node -v` pour vérifier).
 
-## Lancer
+## Configuration
+
+Copie `.env.example` en `.env` à la racine du projet et remplis-le (voir les commentaires du fichier).
+
+## Lancer en local
 
 ```bash
 npm install        # une seule fois (et après chaque mise à jour du projet)
-npm run dev        # développement → http://localhost:5173 (rechargement à chaud)
-npm start          # usage quotidien → http://localhost:3000 (compile le front puis sert tout)
+npm run db:migrate # crée ou met à jour les tables dans Supabase
+npm run dev        # → http://localhost:5173 (rechargement à chaud)
 ```
 
-Les données sont dans `data/fluo.db` (créé au premier lancement).
+En local, Fluo utilise **la même base Supabase** que la version en ligne : ce que tu y modifies est réel.
 
-## Sauvegarde
+## Déployer
 
-En bas de page, **Sauvegarde et réglages** :
-- **Télécharger la sauvegarde** : un fichier JSON avec toutes tes données (à garder hors de l'ordinateur).
-- **Restaurer une sauvegarde** : remplace toutes les données par celles du fichier. Avant chaque restauration,
-  une copie de la base est gardée dans `data/sauvegardes/` (les 10 dernières).
-  Un fichier abîmé est refusé sans rien modifier.
+Chaque `git push` sur la branche principale est déployé automatiquement par Vercel
+(`npm run build:vercel` produit le dossier `.vercel/output`). Si le schéma de la base change,
+lance d'abord `npm run db:migrate` depuis ton ordinateur.
 
 ## Identité visuelle
 
@@ -122,9 +133,9 @@ npm run typecheck  # vérification des types sur tout le projet
 
 ```
 shared/   types + schémas Zod + règles de dates, partagés front/back
-server/   API Hono, base SQLite (Drizzle), migrations dans server/drizzle/
+server/   API Hono, base Postgres via Drizzle, migrations dans server/drizzle/
+scripts/  construction pour Vercel (build-vercel.mjs)
 web/      interface React (Vite)
-data/     base de données (ignorée par git)
 ```
 
 ## Faire évoluer le schéma
@@ -133,22 +144,12 @@ data/     base de données (ignorée par git)
 2. `npm run db:generate` → crée une migration SQL dans `server/drizzle/`
 3. Relancer : les migrations s'appliquent automatiquement au démarrage.
 
-## Bonus : accès depuis un téléphone sur le Wi-Fi de la maison
+## Variables d'environnement
 
-```bash
-npm run reseau
-```
-
-Un QR code s'affiche dans le terminal : scanne-le avec l'appareil photo du téléphone (même Wi-Fi).
-Fluo reste protégé par une clé d'accès (dans `data/cle-acces.txt`, à supprimer pour révoquer tous
-les appareils). L'ordinateur doit rester allumé, écran ouvert.
-
-## Variables d'environnement (optionnelles)
-
-| Variable | Défaut | Rôle |
-|---|---|---|
-| `PORT` | `3000` | port du serveur |
-| `HOST` | `127.0.0.1` | `0.0.0.0` pour l'ouvrir au réseau local |
-| `DATA_DIR` | `./data` | dossier de la base |
-| `APP_TZ` | `Europe/Paris` | fuseau utilisé pour « aujourd'hui » |
-| `FLUO_TRUST_LOCALHOST` | `true` | `false` derrière un proxy (hébergement) : voir `server/src/config.ts` |
+| Variable | Rôle |
+|---|---|
+| `VITE_SUPABASE_URL` | adresse du projet Supabase |
+| `VITE_SUPABASE_PUBLISHABLE_KEY` | clé publique Supabase |
+| `DATABASE_URL` | adresse de la base (Transaction pooler, port 6543) — **secret** |
+| `ALLOWED_EMAILS` | adresse(s) autorisée(s), séparées par des virgules |
+| `APP_TZ` | fuseau pour « aujourd'hui » (défaut `Europe/Paris`) |

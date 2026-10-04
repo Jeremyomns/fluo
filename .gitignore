@@ -3,3 +3,8 @@ web/dist/
 data/
 .DS_Store
 *.log
+
+# Construction Vercel et réglages secrets
+.vercel/
+.env
+.env.local

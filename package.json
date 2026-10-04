@@ -19,10 +19,14 @@
     "db:generate": "npm run db:generate -w server",
     "typecheck": "npm run typecheck --workspaces --if-present",
     "test": "tsx --test shared/src/*.test.ts",
-    "reseau": "npm run build && npm run reseau -w server"
+    "db:migrate": "npm run db:migrate -w server",
+    "build:vercel": "node scripts/build-vercel.mjs"
   },
   "devDependencies": {
+    "@electric-sql/pglite": "^0.5.8",
+    "@electric-sql/pglite-socket": "^0.2.11",
     "concurrently": "^10.0.5",
+    "esbuild": "^0.28.2",
     "typescript": "^7.0.2"
   }
 }

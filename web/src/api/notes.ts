@@ -1,5 +1,6 @@
 import type { Note } from '@fluo/shared';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { currentAccessToken } from '../lib/auth';
 import { api } from './client';
 
 const KEY = ['notes'] as const;
@@ -19,7 +20,7 @@ export function useSaveNote() {
 export function saveNoteOnExit(content: string) {
   fetch('/api/notes', {
     method: 'PUT',
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${currentAccessToken() ?? ''}` },
     body: JSON.stringify({ content }),
     keepalive: true,
   });

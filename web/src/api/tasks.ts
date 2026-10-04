@@ -12,6 +12,7 @@ import { type QueryClient, type QueryKey, useMutation, useQuery, useQueryClient 
 import { useCallback } from 'react';
 import { createStore } from '../lib/store';
 import { toast } from '../lib/toast';
+import { currentAccessToken } from '../lib/auth';
 import { api } from './client';
 
 const TASKS = ['tasks'] as const;
@@ -179,7 +180,11 @@ const unmarkPending = (id: string) =>
 window.addEventListener('pagehide', () => {
   for (const [id, { timer, series }] of timers) {
     window.clearTimeout(timer);
-    fetch(`/api${deleteUrl(id, series)}`, { method: 'DELETE', keepalive: true });
+    fetch(`/api${deleteUrl(id, series)}`, {
+      method: 'DELETE',
+      keepalive: true,
+      headers: { Authorization: `Bearer ${currentAccessToken() ?? ''}` },
+    });
   }
   timers.clear();
 });

@@ -5,6 +5,8 @@ import { MutationCache, QueryClient, QueryClientProvider } from '@tanstack/react
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { App } from './App';
+import { LoginScreen } from './components/LoginScreen';
+import { authDisabled, useAuth } from './lib/auth';
 import { toast } from './lib/toast';
 
 const queryClient = new QueryClient({
@@ -21,10 +23,22 @@ const queryClient = new QueryClient({
   }),
 });
 
+/** Affiche Fluo une fois connecté, sinon l'écran de connexion. */
+function AuthGate() {
+  const auth = useAuth();
+  if (authDisabled) return <App />;
+  if (auth.status === 'loading') return null; // session en cours de lecture : un instant
+  if (auth.status === 'signedOut') {
+    queryClient.clear(); // rien ne reste en mémoire après une déconnexion
+    return <LoginScreen />;
+  }
+  return <App />;
+}
+
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <QueryClientProvider client={queryClient}>
-      <App />
+      <AuthGate />
     </QueryClientProvider>
   </StrictMode>,
 );
