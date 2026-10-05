@@ -130,3 +130,13 @@ export const weeklyGoals = fluo
     (t) => [index('goals_week_idx').on(t.weekStart)],
   )
   .enableRLS();
+
+// ---------- État technique ----------
+/** Petites informations de fonctionnement (ex. dernier passage du réveil quotidien). */
+export const appStatus = fluo
+  .table('app_status', {
+    key: text('key').primaryKey(),
+    value: text('value').notNull(),
+    updatedAt: text('updated_at').notNull(),
+  })
+  .enableRLS();

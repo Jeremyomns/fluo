@@ -1,10 +1,10 @@
 import { Hono } from 'hono';
 import { timingSafeEqual } from 'node:crypto';
-import { count } from 'drizzle-orm';
+import { count, eq } from 'drizzle-orm';
 import { z } from 'zod';
 import { requireAuth } from './auth';
 import { db } from './db/client';
-import { tasks } from './db/schema';
+import { appStatus, tasks } from './db/schema';
 import { HttpError } from './http';
 import { backupRoutes } from './routes/backup';
 import { categoriesRoutes } from './routes/categories';
@@ -31,8 +31,18 @@ app.get('/keepalive', async (c) => {
   const expected = Buffer.from(`Bearer ${secret}`);
   if (given.length !== expected.length || !timingSafeEqual(given, expected)) return c.json({ error: 'Accès refusé' }, 401);
   const [{ n }] = await db.select({ n: count() }).from(tasks);
+  const at = new Date().toISOString();
+  // On note l'heure du passage : Fluo l'affiche dans ses réglages, pour vérifier que le réveil tourne.
+  try {
+    await db
+      .insert(appStatus)
+      .values({ key: 'keepalive', value: at, updatedAt: at })
+      .onConflictDoUpdate({ target: appStatus.key, set: { value: at, updatedAt: at } });
+  } catch (e) {
+    console.warn('[keepalive] trace non enregistrée (migration 0001 à appliquer ?)', (e as Error).message);
+  }
   console.log(`[keepalive] base active (${n} tâches)`);
-  return c.json({ ok: true, at: new Date().toISOString() });
+  return c.json({ ok: true, at });
 });
 
 // Tout le reste exige une connexion.
@@ -43,6 +53,11 @@ app.route('/shopping', shoppingRoutes);
 app.route('/notes', notesRoutes);
 app.route('/habits', habitsRoutes);
 app.route('/goals', goalsRoutes);
+/** Dernier passage du réveil quotidien (affiché dans les réglages). */
+app.get('/status', async (c) => {
+  const rows = await db.select().from(appStatus).where(eq(appStatus.key, 'keepalive')).catch(() => []);
+  return c.json({ lastKeepalive: rows[0]?.value ?? null });
+});
 app.route('/', backupRoutes); // /api/export et /api/import
 app.all('*', (c) => c.json({ error: 'Route inconnue' }, 404));
 

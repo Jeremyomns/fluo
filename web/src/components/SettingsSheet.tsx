@@ -1,4 +1,4 @@
-import { useQueryClient } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { format, parseISO } from 'date-fns';
 import { fr } from 'date-fns/locale';
 import { type ChangeEvent, useRef, useState } from 'react';
@@ -39,6 +39,27 @@ const summary = (counts: Record<string, number>) =>
   Object.entries(LABELS)
     .map(([k, [one, many]]) => `${counts[k] ?? 0} ${(counts[k] ?? 0) > 1 ? many : one}`)
     .join(', ');
+
+/** Réveil quotidien de la base : quand a-t-il tourné pour la dernière fois ? */
+function KeepaliveStatus() {
+  const { data, isError } = useQuery({
+    queryKey: ['status'],
+    queryFn: () => api<{ lastKeepalive: string | null }>('/status'),
+    staleTime: 60_000,
+  });
+  if (isError) return <p className={s.p}>État indisponible pour le moment.</p>;
+  if (!data) return <p className={s.p}>Vérification…</p>;
+  if (!data.lastKeepalive)
+    return <p className={s.p}>Aucun passage enregistré pour l'instant. Le premier aura lieu demain matin vers 8 h.</p>;
+  const last = parseISO(data.lastKeepalive);
+  const hours = (Date.now() - last.getTime()) / 3_600_000;
+  return (
+    <p className={s.p}>
+      {hours < 36 ? '✅' : '⚠️'} Dernier passage : <strong>{format(last, "EEEE d MMMM 'à' HH'h'mm", { locale: fr })}</strong>.
+      {hours >= 36 && ' Le réveil ne semble plus tourner : vérifie les Cron Jobs sur Vercel.'}
+    </p>
+  );
+}
 
 /** Sauvegarde (export JSON) et restauration (import) de toutes les données. */
 export function SettingsSheet({ onClose }: { onClose: () => void }) {
@@ -140,6 +161,11 @@ export function SettingsSheet({ onClose }: { onClose: () => void }) {
             {error}
           </p>
         )}
+      </section>
+
+      <section className={s.block}>
+        <h3 className={s.h}>Réveil de la base</h3>
+        <KeepaliveStatus />
       </section>
 
       {email && (
